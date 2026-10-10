@@ -1,10 +1,15 @@
+import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import heroImg from '../assets/hero.png'
+import reactLogo from '../assets/react.svg'
+import viteLogo from '../assets/vite.svg'
+import '../App.css'
 
-function App() {
+export const Route = createFileRoute('/')({
+  component: Home,
+})
+
+function Home() {
   const [count, setCount] = useState(0)
 
   return (
@@ -18,7 +23,8 @@ function App() {
         <div>
           <h1>Get started</h1>
           <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+            Edit <code>src/routes/index.tsx</code> and save to test{' '}
+            <code>HMR</code>
           </p>
         </div>
         <button
@@ -118,5 +124,3 @@ function App() {
     </>
   )
 }
-
-export default App
