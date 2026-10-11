@@ -1,5 +1,6 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import PersistentHeader from '../components/PersistentHeader'
 
 export const Route = createRootRoute({
   component: RootLayout,
@@ -8,9 +9,7 @@ export const Route = createRootRoute({
 function RootLayout() {
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link> <Link to="/running">Running</Link>
-      </nav>
+      <PersistentHeader />
       <Outlet />
       <TanStackRouterDevtools />
     </>
