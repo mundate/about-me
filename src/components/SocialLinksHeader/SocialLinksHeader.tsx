@@ -7,19 +7,19 @@ type Social = {
   svg: ReactNode
 }
 
-const ICON_SIZE = 4
+const ICON_SIZE = 'size-4'
 
 // TODO: replace with your profile URLs
 const SOCIALS: Social[] = [
   {
     name: 'LinkedIn',
     link: 'https://www.linkedin.com/in/dawsonmunday',
-    svg: <LinkedInIcon className={`size-${ICON_SIZE}`} />,
+    svg: <LinkedInIcon className={ICON_SIZE} />,
   },
   {
     name: 'GitHub',
     link: 'https://github.com/DMMunday1217',
-    svg: <GitHubIcon className={`size-${ICON_SIZE}`} />,
+    svg: <GitHubIcon className={ICON_SIZE} />,
   },
 ]
 

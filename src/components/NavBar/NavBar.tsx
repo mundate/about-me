@@ -19,7 +19,7 @@ const DEFAULT_NAV_LINKS: NavLink[] = [
 const NavBar = ({ navLinks = DEFAULT_NAV_LINKS }: NavBarProps) => {
   return (
     <nav>
-      <ul className="m-0 flex list-none justify-end gap-6 p-0">
+      <ul className="m-0 flex list-none gap-6 p-0">
         {navLinks.map((navLink) => (
           <li key={navLink.to}>
             <Link
