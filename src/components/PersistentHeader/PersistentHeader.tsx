@@ -1,3 +1,4 @@
+import LightModeSwitch from '../LightModeSwitch'
 import Logo from '../Logo'
 import NavBar from '../NavBar'
 import SocialLinksHeader from '../SocialLinksHeader'
@@ -8,7 +9,12 @@ const PersistentHeader = () => {
       <SocialLinksHeader />
       <div className="bg-(--surface) flex items-center gap-3">
         <Logo />
-        <NavBar />
+        <div className="flex-1">
+          <NavBar />
+        </div>
+        <div className="px-5 items-center justify-center">
+          <LightModeSwitch />
+        </div>
       </div>
     </header>
   )
