@@ -1,7 +1,7 @@
+import LightModeSwitch from '../LightModeSwitch'
 import Logo from '../Logo'
 import NavBar from '../NavBar'
 import SocialLinksHeader from '../SocialLinksHeader'
-import Switch from '../Switch'
 
 const PersistentHeader = () => {
   return (
@@ -13,7 +13,7 @@ const PersistentHeader = () => {
           <NavBar />
         </div>
         <div className="px-5 items-center justify-center">
-          <Switch hideLabel={true} />
+          <LightModeSwitch />
         </div>
       </div>
     </header>
