@@ -11,7 +11,7 @@ type NavBarProps = {
 
 const DEFAULT_NAV_LINKS: NavLink[] = [
   { name: 'Home', to: '/' },
-  { name: 'About Me', to: '/about' },
+  { name: 'Experience', to: '/experience' },
   { name: 'Projects', to: '/projects' },
   { name: 'Running', to: '/running' },
 ] as const
