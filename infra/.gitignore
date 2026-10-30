@@ -1,0 +1,12 @@
+# Provider downloads, recreated by terraform init
+.terraform/
+
+# State can contain secrets and lives in S3
+*.tfstate
+*.tfstate.*
+
+# Saved plans
+*.tfplan
+
+crash.log
+crash.*.log
