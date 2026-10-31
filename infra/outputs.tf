@@ -5,3 +5,7 @@ output "repository_arn" {
 output "repository_url" {
   value = aws_ecr_repository.container_repository.repository_url
 }
+
+output "alb_dns_name" {
+  value = aws_lb.about.dns_name
+}
