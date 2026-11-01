@@ -5,6 +5,12 @@ resource "aws_cloudwatch_log_group" "about" {
 
 resource "aws_ecs_cluster" "about" {
   name = "about-me"
+
+  configuration {
+    execute_command_configuration {
+      logging = "DEFAULT"
+    }
+  }
 }
 
 resource "aws_ecs_task_definition" "about" {
