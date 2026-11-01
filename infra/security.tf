@@ -34,19 +34,28 @@ resource "aws_security_group" "alb" {
   }
 }
 
+# Only Cloudflare's proxies can reach the ALB, so visitors can't bypass Cloudflare
+# by connecting to the ALB's DNS name directly. The list is fetched from Cloudflare
+# on every plan, so the rules follow any changes Cloudflare makes to its ranges.
+data "cloudflare_ip_ranges" "cloudflare" {}
+
 resource "aws_vpc_security_group_ingress_rule" "alb_http" {
+  for_each = toset(data.cloudflare_ip_ranges.cloudflare.ipv4_cidrs)
+
   security_group_id = aws_security_group.alb.id
-  description       = "HTTP from anywhere"
-  cidr_ipv4         = "0.0.0.0/0"
+  description       = "HTTP from Cloudflare"
+  cidr_ipv4         = each.value
   ip_protocol       = "tcp"
   from_port         = 80
   to_port           = 80
 }
 
 resource "aws_vpc_security_group_ingress_rule" "alb_https" {
+  for_each = toset(data.cloudflare_ip_ranges.cloudflare.ipv4_cidrs)
+
   security_group_id = aws_security_group.alb.id
-  description       = "HTTP from anywhere"
-  cidr_ipv4         = "0.0.0.0/0"
+  description       = "HTTPS from Cloudflare"
+  cidr_ipv4         = each.value
   ip_protocol       = "tcp"
   from_port         = 443
   to_port           = 443
