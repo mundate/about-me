@@ -1,0 +1,71 @@
+resource "aws_security_group" "tasks" {
+  name        = "about-me-tasks"
+  description = "Traffic to and from the ECS tasks"
+  vpc_id      = aws_vpc.main.id
+
+  tags = {
+    Name = "about-me-tasks"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "tasks_http" {
+  security_group_id            = aws_security_group.tasks.id
+  description                  = "HTTP from the load balancer"
+  referenced_security_group_id = aws_security_group.alb.id
+  ip_protocol                  = "tcp"
+  from_port                    = 80
+  to_port                      = 80
+}
+
+resource "aws_vpc_security_group_egress_rule" "tasks_all" {
+  security_group_id = aws_security_group.tasks.id
+  description       = "All outbound"
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
+
+resource "aws_security_group" "alb" {
+  name        = "about-me-alb"
+  description = "Traffic to and from the ALB"
+  vpc_id      = aws_vpc.main.id
+
+  tags = {
+    Name = "about-me-alb"
+  }
+}
+
+# Only Cloudflare's proxies can reach the ALB, so visitors can't bypass Cloudflare
+# by connecting to the ALB's DNS name directly. The list is fetched from Cloudflare
+# on every plan, so the rules follow any changes Cloudflare makes to its ranges.
+data "cloudflare_ip_ranges" "cloudflare" {}
+
+resource "aws_vpc_security_group_ingress_rule" "alb_http" {
+  for_each = toset(data.cloudflare_ip_ranges.cloudflare.ipv4_cidrs)
+
+  security_group_id = aws_security_group.alb.id
+  description       = "HTTP from Cloudflare"
+  cidr_ipv4         = each.value
+  ip_protocol       = "tcp"
+  from_port         = 80
+  to_port           = 80
+}
+
+resource "aws_vpc_security_group_ingress_rule" "alb_https" {
+  for_each = toset(data.cloudflare_ip_ranges.cloudflare.ipv4_cidrs)
+
+  security_group_id = aws_security_group.alb.id
+  description       = "HTTPS from Cloudflare"
+  cidr_ipv4         = each.value
+  ip_protocol       = "tcp"
+  from_port         = 443
+  to_port           = 443
+}
+
+resource "aws_vpc_security_group_egress_rule" "alb_to_tasks" {
+  security_group_id            = aws_security_group.alb.id
+  description                  = "HTTP to the tasks"
+  referenced_security_group_id = aws_security_group.tasks.id
+  ip_protocol                  = "tcp"
+  from_port                    = 80
+  to_port                      = 80
+}
