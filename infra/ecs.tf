@@ -72,5 +72,5 @@ resource "aws_ecs_service" "about" {
   }
 
   # ECS rejects a target group that isn't attached to a listener yet
-  depends_on = [aws_lb_listener.http]
+  depends_on = [aws_lb_listener.https]
 }
