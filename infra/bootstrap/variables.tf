@@ -21,6 +21,12 @@ variable "monthly_budget_usd" {
   type        = number
 }
 
+variable "github_subject_prefix" {
+  default     = "repo:mundate@338964634/about-me@1412609546"
+  description = "GitHub repo subject clain prefix used to assume the CI roles, found in GitHub Actions OIDC settings"
+  type        = string
+}
+
 variable "budget_alert_email" {
   description = "Email address that receives budget alerts"
   type        = string

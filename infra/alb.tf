@@ -8,11 +8,12 @@ resource "aws_lb" "about" {
 
 # The set of tasks the ALB forwards to. ECS registers each task's private IP here.
 resource "aws_lb_target_group" "about" {
-  name        = "about-me"
-  port        = 80
-  protocol    = "HTTP"
-  target_type = "ip" # Fargate tasks are registered by IP, not by instance
-  vpc_id      = aws_vpc.main.id
+  name                 = "about-me"
+  port                 = 80
+  protocol             = "HTTP"
+  target_type          = "ip" # Fargate tasks are registered by IP, not by instance
+  vpc_id               = aws_vpc.main.id
+  deregistration_delay = 30
 
   health_check {
     path    = "/"

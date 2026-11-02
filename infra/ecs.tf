@@ -28,7 +28,7 @@ resource "aws_ecs_task_definition" "about" {
 
   container_definitions = jsonencode([{
     name      = "about-me"
-    image     = "${aws_ecr_repository.container_repository.repository_url}:0.0.0"
+    image     = "${aws_ecr_repository.container_repository.repository_url}:${var.image_tag}"
     essential = true
 
     portMappings = [{
@@ -48,11 +48,12 @@ resource "aws_ecs_task_definition" "about" {
 }
 
 resource "aws_ecs_service" "about" {
-  name            = "about-me"
-  cluster         = aws_ecs_cluster.about.id
-  task_definition = aws_ecs_task_definition.about.arn
-  desired_count   = 1
-  launch_type     = "FARGATE"
+  name                  = "about-me"
+  cluster               = aws_ecs_cluster.about.id
+  task_definition       = aws_ecs_task_definition.about.arn
+  desired_count         = 1
+  launch_type           = "FARGATE"
+  wait_for_steady_state = true
 
   network_configuration {
     subnets          = aws_subnet.public[*].id

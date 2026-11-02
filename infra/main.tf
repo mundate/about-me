@@ -23,7 +23,7 @@ terraform {
 
 resource "aws_ecr_repository" "container_repository" {
   name                 = "about-me"
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
 
   tags = {
     env = var.environment
