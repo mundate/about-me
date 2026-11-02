@@ -3,8 +3,6 @@ variable "environment" {
   type    = string
 }
 
-variable "cloudflare_api_token" {
-  description = "Cloudfare API token to allow use of cloudfare provider"
-  type        = string
-  sensitive   = true
+variable "image_tag" {
+  type = string
 }
