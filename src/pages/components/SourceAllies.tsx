@@ -6,9 +6,11 @@ const SourceAllies = () => {
     <TimelineItem
       title="Source Allies"
       subtitle="2025 - Present"
-      image={{ src: sai, alt: 'Souce Allies Logo' }}
+      image={{ src: sai, alt: 'Source Allies logo' }}
     >
-      <h4 className="mt-0 mb-1 text-base font-semibold">Software Consultant</h4>
+      <h3 className="mt-0 mb-1 text-base font-semibold">
+        Software Engineering Consultant
+      </h3>
       <p className="mt-0 text-(--text-muted)">Des Moines, IA</p>
       <ul className="mt-0 mb-0 pl-5">
         <li>
@@ -17,13 +19,19 @@ const SourceAllies = () => {
           environments.
         </li>
         <li>
-          Consulted with client teams and leadership to architect secure
+          Contributed to an Agile, product-focused delivery team, collaborating
+          with product owners and cross-functional partners to plan, build, and
+          ship features in iterative sprints.
+        </li>
+        <li>
+          Consulted with client teams and leadership to design secure
           authentication and identity solutions that would allow for a smooth
           migration away from the client's current solution.
         </li>
         <li>
-          Helped build an OAuth 2.0 authorization service securing the client's
-          first public-facing API, enabling safe access for external consumers.
+          Collaborated with network engineers to secure a public-facing API with
+          F5 Distributed Cloud, configuring WAF, API schema enforcement, rate
+          limiting, and other protections.
         </li>
         <li>
           Assisted with technical candidate evaluations by reviewing programming

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExperienceRouteImport } from './routes/experience'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as RunningRouteImport } from './routes/running'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const ExperienceRoute = ExperienceRouteImport.update({
   path: '/experience',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RunningRoute = RunningRouteImport.update({
   id: '/running',
   path: '/running',
@@ -32,30 +38,34 @@ const RunningRoute = RunningRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/experience': typeof ExperienceRoute
+  '/projects': typeof ProjectsRoute
   '/running': typeof RunningRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/experience': typeof ExperienceRoute
+  '/projects': typeof ProjectsRoute
   '/running': typeof RunningRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/experience': typeof ExperienceRoute
+  '/projects': typeof ProjectsRoute
   '/running': typeof RunningRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/experience' | '/running'
+  fullPaths: '/' | '/experience' | '/projects' | '/running'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/experience' | '/running'
-  id: '__root__' | '/' | '/experience' | '/running'
+  to: '/' | '/experience' | '/projects' | '/running'
+  id: '__root__' | '/' | '/experience' | '/projects' | '/running'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExperienceRoute: typeof ExperienceRoute
+  ProjectsRoute: typeof ProjectsRoute
   RunningRoute: typeof RunningRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExperienceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/running': {
       id: '/running'
       path: '/running'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExperienceRoute: ExperienceRoute,
+  ProjectsRoute: ProjectsRoute,
   RunningRoute: RunningRoute,
 }
 export const routeTree = rootRouteImport

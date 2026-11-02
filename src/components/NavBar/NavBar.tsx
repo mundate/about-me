@@ -13,7 +13,6 @@ const DEFAULT_NAV_LINKS: NavLink[] = [
   { name: 'Home', to: '/' },
   { name: 'Experience', to: '/experience' },
   { name: 'Projects', to: '/projects' },
-  { name: 'Running', to: '/running' },
 ] as const
 
 const NavBar = ({ navLinks = DEFAULT_NAV_LINKS }: NavBarProps) => {

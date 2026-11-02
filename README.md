@@ -1,76 +1,35 @@
-# React + TypeScript + Vite
+# about-me
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Source for [dmunday.com](https://dmunday.com), my personal site. I built and run the whole stack, from the React front end to the AWS infrastructure.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Front end:** React 19, TypeScript, Vite, TanStack Router, Tailwind CSS
+- **Testing and quality:** Vitest, Testing Library, ESLint, Prettier, commitlint, Husky
+- **Hosting:** nginx in Docker on AWS ECS Fargate, behind an Application Load Balancer with an ACM certificate and Cloudflare DNS
+- **Infrastructure:** Terraform, in [`infra/`](infra)
+- **CI/CD:** GitHub Actions, in [`ci.yml`](.github/workflows/ci.yml)
 
-## React Compiler
+## How it deploys
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+Cloudflare ──► ALB (HTTPS, ACM cert) ──► ECS Fargate task (nginx container)
+                                              ▲
+                     GitHub Actions ──push──► ECR
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Pull requests run lint, tests, a Docker build, and a `terraform plan`. Merging to `main` pushes an image tagged with the commit SHA and runs `terraform apply`. GitHub Actions authenticates to AWS with OIDC, so no AWS keys are stored in the repo settings.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Running locally
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Requires Node 22.
+
+```sh
+npm install
+npm run dev       # start the dev server
+npm test          # run tests in watch mode
+npm run lint      # run ESLint
+npm run build     # type-check and build for production
 ```
+
+To run the production image locally, use `docker compose up --build`.
