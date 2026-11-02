@@ -35,7 +35,7 @@ const Switch = ({
 
   return (
     <label className="inline-flex cursor-pointer items-center gap-3 has-disabled:cursor-not-allowed has-disabled:opacity-50">
-      <span className={hideLabel ? 'sr-only' : 'text-(--text-h)'}>{label}</span>
+      <span className={hideLabel ? 'sr-only' : 'text-(--text)'}>{label}</span>
       <button
         type="button"
         role="switch"

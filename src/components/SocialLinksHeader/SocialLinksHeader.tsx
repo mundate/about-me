@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
-import { GitHubIcon, LinkedInIcon } from './icons'
+import { CONTACT_EMAIL } from '../../contact'
+import { EmailIcon, GitHubIcon, LinkedInIcon } from './icons'
 
 type Social = {
   name: string
@@ -7,9 +8,8 @@ type Social = {
   svg: ReactNode
 }
 
-const ICON_SIZE = 'size-4'
+const ICON_SIZE = 'size-5'
 
-// TODO: replace with your profile URLs
 const SOCIALS: Social[] = [
   {
     name: 'LinkedIn',
@@ -18,22 +18,30 @@ const SOCIALS: Social[] = [
   },
   {
     name: 'GitHub',
-    link: 'https://github.com/DMMunday1217',
+    link: 'https://github.com/mundate',
     svg: <GitHubIcon className={ICON_SIZE} />,
+  },
+  {
+    name: 'Email',
+    link: `mailto:${CONTACT_EMAIL}`,
+    svg: <EmailIcon className={ICON_SIZE} />,
   },
 ]
 
 const SocialLinksHeader = () => {
   return (
-    <ul className="bg-(--primary) m-0 flex list-none justify-end gap-2 pt-1 pb-0 px-1.5">
+    <ul className="m-0 flex list-none gap-1 p-0">
       {SOCIALS.map((social) => (
         <li key={social.name}>
           <a
             href={social.link}
-            target="_blank"
-            rel="noreferrer"
+            // mailto links open the mail app, so they don't need a new tab
+            {...(social.link.startsWith('http') && {
+              target: '_blank',
+              rel: 'noreferrer',
+            })}
             aria-label={social.name}
-            className="flex text-(--primary) transition-colors hover:text-(--primary-hover) p-2 pb-1 rounded-t-md bg-(--surface)"
+            className="flex rounded-md p-2 text-(--primary) transition-colors hover:bg-(--primary-soft) hover:text-(--primary-hover)"
           >
             {social.svg}
           </a>

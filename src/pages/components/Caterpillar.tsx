@@ -4,13 +4,13 @@ import { TimelineItem } from '../../components/VerticalTimeline'
 const Caterpillar = () => {
   return (
     <TimelineItem
-      title="Caterpillar Inc"
+      title="Caterpillar Inc."
       subtitle="2021 - 2025"
-      image={{ src: cat, alt: 'Caterpillar Logo' }}
+      image={{ src: cat, alt: 'Caterpillar logo' }}
     >
-      <h4 className="mt-0 mb-1 text-base font-semibold">
+      <h3 className="mt-0 mb-1 text-base font-semibold">
         Software Engineer II
-      </h4>
+      </h3>
       <p className="mt-0 text-(--text-muted)">Remote</p>
       <ul className="mt-0 mb-0 pl-5">
         <li>
@@ -27,14 +27,16 @@ const Caterpillar = () => {
           troubleshooting, and enhancement requests.
         </li>
         <li>
-          Administered and maintained on-premise servers critical to embedded
-          software development workflows.
+          Administered and maintained on-premise Kubernetes cluster for embedded
+          software development.
         </li>
       </ul>
 
       <hr className="my-6 h-0 border-0 border-t border-(--border)" />
 
-      <h4 className="mt-0 mb-1 text-base font-semibold">Software Engineer I</h4>
+      <h3 className="mt-0 mb-1 text-base font-semibold">
+        Senior Associate Engineer
+      </h3>
       <p className="mt-0 text-(--text-muted)">Peoria, IL</p>
       <ul className="mt-0 pl-5">
         <li>
@@ -50,16 +52,6 @@ const Caterpillar = () => {
           pipeline execution, laying the groundwork for scalable build
           infrastructure.
         </li>
-      </ul>
-      <p className="mb-0 text-sm text-(--text-muted)">
-        Tech: Azure DevOps Pipelines, Kubernetes
-      </p>
-
-      <hr className="my-6 h-0 border-0 border-t border-(--border)" />
-
-      <h4 className="mt-0 mb-1 text-base font-semibold">Associate Engineer</h4>
-      <p className="mt-0 text-(--text-muted)">Peoria, IL</p>
-      <ul className="mt-0 pl-5">
         <li>
           Collaborated with global software teams to design and implement new
           features for heavy machinery embedded systems.
@@ -76,6 +68,16 @@ const Caterpillar = () => {
           Managed and upgraded on-premise Ubuntu servers to support future
           Kubernetes-based development pipelines.
         </li>
+      </ul>
+      <p className="mb-0 text-sm text-(--text-muted)">
+        Tech: Azure DevOps Pipelines, Kubernetes, Make, CMake, Ubuntu
+      </p>
+
+      <hr className="my-6 h-0 border-0 border-t border-(--border)" />
+
+      <h3 className="mt-0 mb-1 text-base font-semibold">Associate Engineer</h3>
+      <p className="mt-0 text-(--text-muted)">Remote</p>
+      <ul className="mt-0 mb-0 pl-5">
         <li>
           Developed a front-end web application enabling management to
           efficiently visualize and manage project data, replacing Excel-based
@@ -86,9 +88,6 @@ const Caterpillar = () => {
           datasets and map relationships among multiple file sources.
         </li>
       </ul>
-      <p className="mb-0 text-sm text-(--text-muted)">
-        Tech: Make, CMake, Ubuntu, Kubernetes
-      </p>
     </TimelineItem>
   )
 }

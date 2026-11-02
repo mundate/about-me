@@ -6,9 +6,11 @@ const IowaStateWebDev = () => {
     <TimelineItem
       title="Iowa State WebDev"
       subtitle="2019 - 2021"
-      image={{ src: isu, alt: 'Iowa State Logo' }}
+      image={{ src: isu, alt: 'Iowa State logo' }}
     >
-      <h4 className="mt-0 mb-1 text-base font-semibold">Web Developer</h4>
+      <h3 className="mt-0 mb-1 text-base font-semibold">
+        Student Web Developer
+      </h3>
       <p className="mt-0 text-(--text-muted)">Ames, IA</p>
       <ul className="mt-0 pl-5">
         <li>
@@ -27,12 +29,6 @@ const IowaStateWebDev = () => {
         <li>
           Utilized Agile methodologies and Jira for sprint planning, task
           tracking, and progress reporting.
-        </li>
-        <li>
-          Developed and delivered a web application enabling graduating seniors
-          to upload personal information and photos for display during the
-          graduation ceremony, meeting a fixed project deadline with the
-          successful solution.
         </li>
       </ul>
       <p className="mb-0 text-sm text-(--text-muted)">
